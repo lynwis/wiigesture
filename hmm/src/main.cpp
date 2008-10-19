@@ -51,7 +51,7 @@ int main()
 
     // se size<2 si ha errore in backwardProc, e crash a riga 146 di hmm.cpp
     int size = 100;// + rand()%100;
-    int numStati = 3;
+    int numStati = 8;
     bool isErgodic = false;
 
     cout << "size: " << size << endl;
@@ -101,24 +101,33 @@ int main()
 
     cHMM hmm(numStati, isErgodic, 1);
 
-    hmm.trainMS(dataset);
+    //hmm.trainMS(dataset);
 
     //std::cout<<hmm.getA()<<std::endl;
 
 
     /*** test caso discreto ***/
 
-    int n_samples_disc = 10000;
-    int numSimboli = 4;
+    int n_samples_disc = 10;
+    int numSimboli = 14;
 
     vector< vector<int> > set;
     vector<int> g;
 
     for(int i=0; i<size; i++){
-        int x = rand() % numSimboli;
+        int x; //= rand() % numSimboli;
+
+        if(i<30)
+            x = 1;
+        else if(30<i<=60)
+            x = 2;
+        else
+            x = 3;
+
         g.push_back(x);
         //std::cout<<x<<std::endl;
     }
+
 
     for(int j=0; j<n_samples_disc; j++)
         set.push_back(g);
